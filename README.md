@@ -12,7 +12,7 @@
 To get started
 
 ```bash
- git clone git@github.com:jfollenfant/mongodb-sharding-docker-compose.git
+ git clone git@github.com:rfielding/mongodb-sharding-docker-compose.git
  cd mongodb-sharding-docker-compose
  ./down.sh && rm -rf data && ./up.sh 
 ```
