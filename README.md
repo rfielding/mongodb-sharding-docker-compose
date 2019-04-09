@@ -48,3 +48,50 @@ Smoke test it
 ./test0.sh
 ```  
 
+To see what is going on here, look at the processes that are running.
+
+```
+docker-compose ps
+```
+
+Notice that the shards are from `01` to `03` and `a` to `c`.  The idea is that each machine
+can hold about 1/3 of each shard of the data.  The shard is replicated to 3 machines (replication factor).
+
+```
+                Name                               Command               State     Ports  
+------------------------------------------------------------------------------------------
+mongodbdocker_mongo-configserver-01_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-configserver-02_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-configserver-03_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-router-01_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-01a_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-01b_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-01c_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-02a_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-02b_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-02c_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-03a_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-03b_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-03c_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+```
+
+If we wanted to have 10 shards with a replication factor of 3, then we would have shards up to `10`.
+
+```
+// mongo-shard-01
+sh.addShard( "mongo-shard-01/mongo-shard-01a:27018")
+sh.addShard( "mongo-shard-01/mongo-shard-01b:27018")
+sh.addShard( "mongo-shard-01/mongo-shard-01c:27018")
+
+// mongo-shard-02
+sh.addShard( "mongo-shard-02/mongo-shard-02a:27019")
+sh.addShard( "mongo-shard-02/mongo-shard-02b:27019")
+sh.addShard( "mongo-shard-02/mongo-shard-02c:27019")
+
+// mongo-shard-03
+sh.addShard( "mongo-shard-03/mongo-shard-03a:27020")
+sh.addShard( "mongo-shard-03/mongo-shard-03b:27020")
+sh.addShard( "mongo-shard-03/mongo-shard-03c:27020")
+
+...
+```
