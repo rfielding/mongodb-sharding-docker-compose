@@ -7,8 +7,12 @@ export COMPOSE_PROJECT_NAME=mongodbdocker
 openssl rand -base64 756 > mongodb.key
 chmod 600 mongodb.key
 
+mkdir data
+
 ## Start the whole stack
 docker-compose up -d 
+
+sleep 60
 
 ## Config servers setup
 docker exec -it mongodbdocker_mongo-configserver-01_1 sh -c "mongo --port 27017 < /mongo-configserver.init.js"

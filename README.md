@@ -9,43 +9,42 @@
  * mongo query router: 1x mongos
  * authentication enabled + global auth key certificate between nodes
 
-:warning: Of course this is for development purpose only  
+To get started
 
-    # Usage :
-    $ git clone git@github.com:jfollenfant/mongodb-sharding-docker-compose.git
-    $ mongodb-sharding-docker-compose
-    $ ./up.sh
-    
-    
+```bash
+ git clone git@github.com:jfollenfant/mongodb-sharding-docker-compose.git
+ cd mongodb-sharding-docker-compose
+ ./down.sh && rm -rf data && ./up.sh 
+```
+
+To re-run clean (deleted data)
+
+```bash
+ ./down.sh && rm -rf data && ./up.sh 
+```
+
 You can also edit mongo-auth.init.js to change admin credentials before turning up the cluster
 
+```javascript
     admin = db.getSiblingDB("admin")
     admin.createUser(
       {
          user: "admin",
          pwd: "admin",
-         roles: [ { role: "userAdminAnyDatabase", db: "admin" } ] 
+         roles: [ { role: "root", db: "admin" } ] 
       }
     )
+```
 
-:tropical_drink: Then you should be able to log into the cluster:
+Peek around inside
 
-    $ docker exec -it mongodbdocker_mongo-router-01_1 mongo admin  -u'admin' -p'admin'
-    MongoDB shell version v3.4.2
-    connecting to: mongodb://127.0.0.1:27017/admin
-    MongoDB server version: 3.4.2
-    mongos>
-    
-  
+```bash
+./shell.sh admin
+```
 
-:beer: And turn it down with:
+Smoke test it
 
-    $ ./down.sh
-    
-    
-   # TODO :construction:
-   
-  * Generate random data to populate shards through balancing 
-  * Update compose syntax to v3 
-  * Use swarm capabilities for production grade deployment 
-  
+```bash
+./test0.sh
+```  
+
