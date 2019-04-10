@@ -12,7 +12,7 @@
 
 > This means a replication factor of 3, with data sharded into 4.  This means that we can store 4x what any single server can store, and store everything redundantly 3 times.  2 of the 3 of every replica set must survive in order to never lose data.
 
-To get started
+# To get started
 
 ```bash
  git clone git@github.com:rfielding/mongodb-sharding-docker-compose.git
@@ -24,6 +24,59 @@ To re-run clean (deleted data)
 
 ```bash
  ./down.sh && rm -rf data && ./up.sh 
+```
+
+# How It Works
+
+## Config Server
+
+This is much like a Zookeeper or Consul cluster.  A majority of these nodes must always be up to serve config.
+
+```javascript
+rs.initiate(
+   {
+      _id: "mongo-configserver",
+      configsvr: true,
+      version: 1,
+      members: [
+         { _id: 0, host : "mongo-configserver-01:27017" },
+         { _id: 1, host : "mongo-configserver-02:27017" },
+         { _id: 2, host : "mongo-configserver-03:27017" }
+      ]
+   }
+)
+```
+
+
+Then per-shard initiation begins.  When we go to initiate each primary for a shard, we pipe a script into that primary (`a`) like this:
+
+```javascript
+rs.initiate(
+   {
+      _id: "mongo-shard-01",
+      version: 1,
+      members: [
+         { _id: 0, host : "mongo-shard-01a:27018" },
+         { _id: 1, host : "mongo-shard-01b:27018" },
+         { _id: 2, host : "mongo-shard-01c:27018" }
+      ]
+   }
+)
+```
+
+This config is sent to the primary (`a`) representing each shard.
+
+```bash
+docker exec -it mongodbdocker_mongo-shard-03a_1 sh -c "mongo --port 27020 < /mongo-shard-03.init.js"
+```
+
+This associates the shard with the machines
+
+```bash
+// mongo-shard-03
+sh.addShard( "mongo-shard-03/mongo-shard-03a:27020")
+sh.addShard( "mongo-shard-03/mongo-shard-03b:27020")
+sh.addShard( "mongo-shard-03/mongo-shard-03c:27020")
 ```
 
 You can also edit mongo-auth.init.js to change admin credentials before turning up the cluster
