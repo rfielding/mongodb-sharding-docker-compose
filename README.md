@@ -6,8 +6,11 @@
  * first replicaset shard: 3x mongod 
  * second replicaset shard: 3x mongod
  * third replicaset shard: 3x mongod
+ * fourth replicaset shard: 3x mongod
  * mongo query router: 1x mongos
  * authentication enabled + global auth key certificate between nodes
+
+> This means a replication factor of 3, with data sharded into 4.  This means that we can store 4x what any single server can store, and store everything redundantly 3 times.  2 of the 3 of every replica set must survive in order to never lose data.
 
 To get started
 
