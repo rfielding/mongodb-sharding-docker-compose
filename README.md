@@ -73,6 +73,9 @@ mongodbdocker_mongo-shard-02c_1         docker-entrypoint.sh mongo ...   Up     
 mongodbdocker_mongo-shard-03a_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
 mongodbdocker_mongo-shard-03b_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
 mongodbdocker_mongo-shard-03c_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-04a_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-04b_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-shard-04c_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
 ```
 
 If we wanted to have 10 shards with a replication factor of 3, then we would have shards up to `10`.
@@ -92,6 +95,11 @@ sh.addShard( "mongo-shard-02/mongo-shard-02c:27019")
 sh.addShard( "mongo-shard-03/mongo-shard-03a:27020")
 sh.addShard( "mongo-shard-03/mongo-shard-03b:27020")
 sh.addShard( "mongo-shard-03/mongo-shard-03c:27020")
+
+// mongo-shard-04
+sh.addShard( "mongo-shard-04/mongo-shard-04a:27020")
+sh.addShard( "mongo-shard-04/mongo-shard-04b:27020")
+sh.addShard( "mongo-shard-04/mongo-shard-04c:27020")
 
 ...
 ```

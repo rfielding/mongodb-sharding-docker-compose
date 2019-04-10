@@ -21,6 +21,7 @@ docker exec -it mongodbdocker_mongo-configserver-01_1 sh -c "mongo --port 27017 
 docker exec -it mongodbdocker_mongo-shard-01a_1 sh -c "mongo --port 27018 < /mongo-shard-01.init.js" 
 docker exec -it mongodbdocker_mongo-shard-02a_1 sh -c "mongo --port 27019 < /mongo-shard-02.init.js"
 docker exec -it mongodbdocker_mongo-shard-03a_1 sh -c "mongo --port 27020 < /mongo-shard-03.init.js"
+docker exec -it mongodbdocker_mongo-shard-04a_1 sh -c "mongo --port 27021 < /mongo-shard-04.init.js"
 
 ## Apply sharding configuration
 sleep 15

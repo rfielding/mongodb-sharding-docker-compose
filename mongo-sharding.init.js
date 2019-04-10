@@ -12,3 +12,8 @@ sh.addShard( "mongo-shard-02/mongo-shard-02c:27019")
 sh.addShard( "mongo-shard-03/mongo-shard-03a:27020")
 sh.addShard( "mongo-shard-03/mongo-shard-03b:27020")
 sh.addShard( "mongo-shard-03/mongo-shard-03c:27020")
+
+// mongo-shard-04
+sh.addShard( "mongo-shard-04/mongo-shard-04a:27021")
+sh.addShard( "mongo-shard-04/mongo-shard-04b:27021")
+sh.addShard( "mongo-shard-04/mongo-shard-04c:27021")
