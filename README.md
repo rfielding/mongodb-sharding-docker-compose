@@ -39,9 +39,9 @@ rs.initiate(
       configsvr: true,
       version: 1,
       members: [
-         { _id: 0, host : "mongo-configserver-01:27017" },
-         { _id: 1, host : "mongo-configserver-02:27017" },
-         { _id: 2, host : "mongo-configserver-03:27017" }
+         { _id: 0, host : "mongo-configserver-a:27017" },
+         { _id: 1, host : "mongo-configserver-b:27017" },
+         { _id: 2, host : "mongo-configserver-c:27017" }
       ]
    }
 )
@@ -125,9 +125,9 @@ can hold about 1/4 of the data.  The shard is replicated to 3 machines (replicat
 ```
                 Name                               Command               State     Ports  
 ------------------------------------------------------------------------------------------
-mongodbdocker_mongo-configserver-01_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
-mongodbdocker_mongo-configserver-02_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
-mongodbdocker_mongo-configserver-03_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-configserver-a_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-configserver-b_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
+mongodbdocker_mongo-configserver-c_1   docker-entrypoint.sh mongo ...   Up      27017/tcp
 mongodbdocker_mongo-router-01_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
 mongodbdocker_mongo-shard-01a_1         docker-entrypoint.sh mongo ...   Up      27017/tcp
 mongodbdocker_mongo-shard-01b_1         docker-entrypoint.sh mongo ...   Up      27017/tcp

@@ -15,7 +15,7 @@ docker-compose up -d
 sleep 60
 
 ## Config servers setup
-docker exec -it mongodbdocker_mongo-configserver-01_1 sh -c "mongo --port 27017 < /mongo-configserver.init.js"
+docker exec -it mongodbdocker_mongo-configserver-a_1 sh -c "mongo --port 27017 < /mongo-configserver.init.js"
 
 ## Shard servers setup
 docker exec -it mongodbdocker_mongo-shard-01a_1 sh -c "mongo --port 27018 < /mongo-shard-01.init.js" 
