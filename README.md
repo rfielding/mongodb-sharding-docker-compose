@@ -28,7 +28,7 @@ To re-run clean (deleted data)
 
 # How It Works
 
-## Config Server
+## Internals of `./up.sh`
 
 This is much like a Zookeeper or Consul cluster.  A majority of these nodes must always be up to serve config.
 
@@ -92,13 +92,15 @@ You can also edit mongo-auth.init.js to change admin credentials before turning 
     )
 ```
 
-Peek around inside
+## Make Sure It Worked
+
+Peek around inside the shell
 
 ```bash
 ./shell.sh admin
 ```
 
-Smoke test it
+Smoke test it by inserting and dumping a record
 
 ```bash
 ./test0.sh
