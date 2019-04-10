@@ -1,1 +1,5 @@
 mongodb.key
+docker-compose.yml
+mongo-configserver.init.js
+mongo-shard-*.js
+mongo-sharding.init.js
