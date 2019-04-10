@@ -79,6 +79,13 @@ sh.addShard( "mongo-shard-03/mongo-shard-03b:27020")
 sh.addShard( "mongo-shard-03/mongo-shard-03c:27020")
 ```
 
+Which is done against the router, which is much like an edge proxy that reverse-proxies clients to get them to the right shard.
+
+```
+docker exec -it mongodbdocker_mongo-router-01_1 sh -c "mongo --port 27017 < /mongo-sharding.init.js"
+```
+
+
 You can also edit mongo-auth.init.js to change admin credentials before turning up the cluster
 
 ```javascript
