@@ -58,7 +58,7 @@ docker-compose ps
 ```
 
 Notice that the shards are from `01` to `03` and `a` to `c`.  The idea is that each machine
-can hold about 1/3 of each shard of the data.  The shard is replicated to 3 machines (replication factor).
+can hold about 1/4 of the data.  The shard is replicated to 3 machines (replication factor).
 
 ```
                 Name                               Command               State     Ports  
