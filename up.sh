@@ -15,7 +15,7 @@ declare -a shards=(01 02 03 04)
 ##
 ## Generate the docker-compose file, and init scripts, so we can vary shard count
 ##
-echo "version: '2'" > docker-compose.yml
+echo "version: '3.4'" > docker-compose.yml
 echo "services:" >> docker-compose.yml
 cfgurl=
 echo "rs.initiate({_id:'mongo-configserver',configsvr:true,version:1,members:[" > mongo-configserver.init.js
